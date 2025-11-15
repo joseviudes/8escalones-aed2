@@ -1,0 +1,2 @@
+Cual es la capital de Argentina?;Cordoba;Buenos Aires;Corrientes;b
+Cuanto es 10+10;10;20;30;b
