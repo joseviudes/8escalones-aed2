@@ -1,7 +1,9 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
-void jugar(); 
+#include "lista.h"
+#include "cola.h"
+
+void jugar(Nodo* lista);
 
 #endif
-

@@ -1,20 +1,11 @@
-#define MAX_TEXTO 100
-#define MAX_OPCION 50
-typedef char tString[50];
+#ifndef PREGUNTAS_H
+#define PREGUNTAS_H
 
-typedef struct {
-    tString texto;
-    tString opcionA;
-    tString opcionB;
-    tString opcionC;
-    char correcta; /* 'A', 'B' o 'C' */
-} tPregunta;
+#include "lista.h"
 
-/* Prototipos */
-void abrirArchivoPreguntas();
-void leerPregunta(tPregunta*); /*leer un archivo txt con las preguntas*/
-void mostrarPregunta(tPregunta);
-int verificarRespuesta(tPregunta, char);
-void cerrarArchivoPreguntas();
+void cargarPreguntasDesdeArchivo(Nodo** lista);
 
+// se ejecuta 1 vez para crear preguntas.dat
+void generarArchivoPreguntas();
 
+#endif
