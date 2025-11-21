@@ -1,23 +1,14 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-typedef struct {
-	int id;
-	char enunciado[200];
-	char opcionA[100];
-	char opcionB[100];
-	char opcionC[100];
-	char opcionD[100];
-	char correcta;
-	char tema[50];
-} Pregunta;
+#include "preguntas.h"
 
-typedef struct Nodo {
-	Pregunta dato;
-	struct Nodo* sig;
-} Nodo;
+typedef struct nodo {
+    tPregunta dato;
+    struct nodo* sig;
+} tNodo;
 
-void insertarAlFinal(Nodo** lista, Pregunta p);
-void liberarLista(Nodo** lista);
+void insertarAlFinal(tNodo** lista, tPregunta dato);
+void liberarLista(tNodo** lista);
 
 #endif
