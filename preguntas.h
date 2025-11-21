@@ -1,11 +1,19 @@
 #ifndef PREGUNTAS_H
 #define PREGUNTAS_H
 
-#include "lista.h"
+typedef char tString[100];
 
-void cargarPreguntasDesdeArchivo(Nodo** lista);
-
-// se ejecuta 1 vez para crear preguntas.dat
-void generarArchivoPreguntas();
+typedef struct tPregunta {
+    int id;
+    tString tema;
+    tString opcionA;
+    tString opcionB;
+    tString opcionC;
+    tString opcionD;
+    tString enunciado;
+    char correcta;
+} tPregunta;
 
 #endif
+
+
