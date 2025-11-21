@@ -1,43 +1,45 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "cola.h"
 
-void inicializarCola(Cola* cola) {
-	cola->frente = NULL;
-	cola->final = NULL;
+void inicializarCola(tCola* cola) {
+    cola->frente = NULL;
+    cola->final = NULL;
 }
 
-int colaVacia(Cola* cola) {
-	return (cola->frente == NULL);
+int colaVacia(tCola* cola) {
+    return cola->frente == NULL;
 }
 
-void encolar(Cola* cola, Pregunta pregunta) {
-	ColaNodo* nuevoNodo = (ColaNodo*) malloc(sizeof(ColaNodo));
-	if (nuevoNodo == NULL) {
-        printf("Error al reservar memoria.\n");
-        return;;
+void encolar(tCola* cola, tPregunta pregunta) {
+
+    tColaNodo* nuevo = (tColaNodo*) malloc(sizeof(tColaNodo));
+    nuevo->dato = pregunta;
+    nuevo->sig = NULL;
+
+    if (cola->final == NULL) {
+        cola->frente = nuevo;
+        cola->final = nuevo;
+    } else {
+        cola->final->sig = nuevo;
+        cola->final = nuevo;
     }
-    
-	nuevoNodo->dato = pregunta;
-	nuevoNodo->sig = NULL;
-	
-	if (colaVacia(cola)) {
-		cola->frente = nuevoNodo;
-		cola->final = nuevoNodo;
-	} else {
-		cola->final->sig = nuevoNodo;
-		cola->final = nuevoNodo;
-	}
 }
 
-Pregunta desencolar(Cola* cola) {
-    ColaNodo* aux = cola->frente;
-    Pregunta pregunta = aux->dato;
+tPregunta desencolar(tCola* cola) {
+
+    tColaNodo* aux = cola->frente;
+    tPregunta p = aux->dato;
 
     cola->frente = aux->sig;
-    if (cola->frente == NULL) {   // si quedó vacía
+
+    if (cola->frente == NULL) {
         cola->final = NULL;
     }
 
     free(aux);
-    return pregunta;
+
+    return p;
+}
+eturn pregunta;
 }
