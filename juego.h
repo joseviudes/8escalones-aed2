@@ -4,6 +4,6 @@
 #include "lista.h"
 #include "cola.h"
 
-void jugar(Nodo* lista);
+void jugar(tNodo* listaPreguntas);
 
 #endif
