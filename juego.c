@@ -1,24 +1,23 @@
 #include <windows.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include "juego.h"
+#include "jugador.h"
+#include "cola.h"
+#include "lista.h"
 
-// para poner colores
+// Colores
 #define RESET   "\x1b[0m"
 #define ROJO    "\x1b[31m"
 #define VERDE   "\x1b[32m"
 #define AMARILLO "\x1b[33m"
 #define AZUL    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN    "\x1b[36m"
-#define BLANCO  "\x1b[37m"
 
-Cola cola;
-Pregunta pregunta;
-
+// Cola de preguntas
+tCola cola;      
+tPregunta pregunta;
 
 void mostrarEscalon(int actual, int total) {
     if (actual > total) return;
@@ -27,12 +26,16 @@ void mostrarEscalon(int actual, int total) {
     mostrarEscalon(actual + 1, total);
 }
 
-void jugar(Nodo* lista) {
-	
-	// seleccionar solo preguntas de temas DIFERENTES
+void jugar(tNodo* lista) {
+
+	/*inicialiamos Jugador*/
+    tJugador jugador;
+    inicializarJugador(&jugador);
+
+	/*filtramos los Temas*/
     char temasUsados[20][50];
     int cantTemas = 0;
-	
+
     if (lista == NULL) {
         printf("No se encontraron preguntas cargadas.\n");
         return;
@@ -40,11 +43,14 @@ void jugar(Nodo* lista) {
 
     inicializarCola(&cola);
 
-    Nodo* aux = lista;
+    tNodo* aux = lista; 
+
     while (aux != NULL && cantTemas < 8) {
 
-        int i, repetido = 0;
-        for (i = 0; i < cantTemas; i++) {
+        int repetido = 0;
+        
+        int i;
+		for (i = 0; i < cantTemas; i++) {
             if (strcmp(aux->dato.tema, temasUsados[i]) == 0) {
                 repetido = 1;
                 break;
@@ -52,7 +58,6 @@ void jugar(Nodo* lista) {
         }
 
         if (!repetido) {
-            // guardamos el tema y encolamos la pregunta
             strcpy(temasUsados[cantTemas], aux->dato.tema);
             cantTemas++;
             encolar(&cola, aux->dato);
@@ -60,18 +65,16 @@ void jugar(Nodo* lista) {
 
         aux = aux->sig;
     }
-    printf("DEBUG: cantTemas = %d\n", cantTemas);
-    
-    // lógica del juego
-    int escalon = 1;
-    int totalEscalones = 8;
-    int vidas = 1;
 
-    while (escalon <= totalEscalones && !colaVacia(&cola)) {
+   	/*arranca el JUEGO*/
+
+    int totalEscalones = 8;
+
+    while (jugador.escalon <= totalEscalones && !colaVacia(&cola)) {
 
         pregunta = desencolar(&cola);
 
-        printf(AZUL "\n===== ESCALON %d =====\n" RESET, escalon);
+        printf(AZUL "\n===== ESCALON %d =====\n" RESET, jugador.escalon);
         printf("Tema: %s\n\n", pregunta.tema);
         printf("%s\n", pregunta.enunciado);
         printf("A) %s\n", pregunta.opcionA);
@@ -83,36 +86,34 @@ void jugar(Nodo* lista) {
         printf("Respuesta: ");
         scanf(" %c", &respuesta);
         respuesta = toupper(respuesta);
-        
-        // para agregarle suspenso
+
+        // Suspenso
         printf("\n...");
-		Sleep(1000);  
-		printf(" ...");
-		Sleep(1000); 
-		printf(" ...\n");
-		Sleep(1000); 
-        
+        Sleep(1000);
+        printf(" ...");
+        Sleep(1000);
+        printf(" ...\n");
+        Sleep(1000);
 
         if (respuesta == pregunta.correcta) {
             printf(VERDE "Respuesta correcta!\n" RESET);
-            escalon++;
+            subirEscalon(&jugador);    
+        } 
+        else {
+            printf(ROJO "Incorrecta! La correcta era: %c\n" RESET, pregunta.correcta);
+            perderVidas(&jugador);  
 
-        } else {
-            printf(ROJO "Respuesta incorrecta! La correcta era: %c\n" RESET, pregunta.correcta);
-            vidas--;
-
-            if (vidas < 0) {
-                printf(ROJO "\nPERDISTE TODAS LAS VIDAS. FIN DEL JUEGO.\n" RESET);
+            if (jugador.vidas < 0) {
+                printf(ROJO "\nPERDISTE. FIN DEL JUEGO.\n" RESET);
                 return;
-            } else {
-                printf(AMARILLO  "Te queda 1 vida. Cuidado!\n" RESET);
             }
         }
     }
 
-    if (escalon > totalEscalones) {
-        printf("\n ¡GANASTE EL JUEGO! \n");
+    if (jugador.escalon > totalEscalones) {
+        printf(VERDE "\nÂ¡GANASTE EL JUEGO!\n" RESET);
         mostrarEscalon(1, totalEscalones);
     }
 }
+
 
