@@ -8,10 +8,8 @@ void mostrarMenu();
 void mostrarReglas();
 void ejecutarMenu();
 
-int main () {
-
+int main(){
 	ejecutarMenu();	
-
 	return 0;
 }
 
@@ -45,7 +43,7 @@ void mostrarReglas() {
 void ejecutarMenu() {
 
     int opcion;
-    Nodo* listaPreguntas = NULL;
+    tNodo* listaPreguntas = NULL;
 
     do {
         mostrarMenu();
