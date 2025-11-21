@@ -1,21 +1,21 @@
 #ifndef COLA_H
 #define COLA_H
 
-#include "lista.h"
+#include "preguntas.h"
 
-typedef struct ColaNodo {
-	Pregunta dato;
-	struct ColaNodo* sig;
-} ColaNodo;
+typedef struct colaNodo {
+    tPregunta dato;
+    struct colaNodo* sig;
+} tColaNodo;
 
 typedef struct {
-	ColaNodo* frente;
-	ColaNodo* final;
-} Cola;
+    tColaNodo* frente;
+    tColaNodo* final;
+} tCola;
 
-void inicializarCola(Cola* cola);
-int colaVacia(Cola* cola);
-void encolar(Cola* cola, Pregunta pregunta);
-Pregunta desencolar(Cola* c);
+void inicializarCola(tCola* cola);
+int colaVacia(tCola* cola);
+void encolar(tCola* cola, tPregunta pregunta);
+tPregunta desencolar(tCola* cola);
 
 #endif
