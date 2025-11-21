@@ -2,28 +2,30 @@
 #include <stdlib.h>
 #include "lista.h"
 
-void insertarAlFinal(Nodo** lista, Pregunta pregunta) {
-    Nodo* nuevoNodo = (Nodo*) malloc(sizeof(Nodo));
+void insertarAlFinal(tNodo** lista, tPregunta pregunta) {
+
+    tNodo* nuevoNodo = (tNodo*) malloc(sizeof(tNodo));  
     nuevoNodo->dato = pregunta;
     nuevoNodo->sig = NULL;
 
     if (*lista == NULL) {
         *lista = nuevoNodo;
     } else {
-        Nodo* aux = *lista;
-        while (aux->sig != NULL) {  // recorre hasta el último
+        tNodo* aux = *lista;
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
-        aux->sig = nuevoNodo; // ENLAZA AL FINAL
+        aux->sig = nuevoNodo;
     }
 }
 
-void liberarLista(Nodo** lista) {
-	Nodo* aux;
-	
-	while(*lista != NULL) {
-		aux = *lista;
-		*lista = (*lista)->sig;
-		free(aux);
-	}
+void liberarLista(tNodo** lista) {
+
+    tNodo* aux;
+
+    while (*lista != NULL) {
+        aux = *lista;
+        *lista = (*lista)->sig;
+        free(aux);
+    }
 }
