@@ -100,7 +100,7 @@ void jugar(tNodo* lista) {
             subirEscalon(&jugador);    
         } 
         else {
-            printf(ROJO "Incorrecta! La correcta era: %c\n" RESET, pregunta.correcta);
+            printf(ROJO "Incorrecta! La correcta era: %c \n\n*Te queda 1 vida*\n" RESET, pregunta.correcta);
             perderVidas(&jugador);  
 
             if (jugador.vidas < 0) {
@@ -115,5 +115,6 @@ void jugar(tNodo* lista) {
         mostrarEscalon(1, totalEscalones);
     }
 }
+
 
 
