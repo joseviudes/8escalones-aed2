@@ -41,24 +41,25 @@ void generarArchivoPreguntas(){
     /* 3 — HISTORIA */
     pregunta.id = 3;
     strcpy(pregunta.tema, "Historia");
-    strcpy(pregunta.enunciado, "En que anio cayo el muro de Berlin?");
-    strcpy(pregunta.opcionA, "1987");
-    strcpy(pregunta.opcionB, "1989");
-    strcpy(pregunta.opcionC, "1975");
-    strcpy(pregunta.opcionD, "1991");
-    pregunta.correcta = 'B';
+    strcpy(pregunta.enunciado, "Quien fue el primer presidente argentino?");
+    strcpy(pregunta.opcionA, "Bernardino Rivadavia");
+    strcpy(pregunta.opcionB, "San Martín");
+    strcpy(pregunta.opcionC, "Belgrano");
+    strcpy(pregunta.opcionD, "Urquiza");
+    pregunta.correcta = 'A';
     fwrite(&pregunta, sizeof(tPregunta), 1, archPreguntas);
 
     /* 4 — CIENCIA */
-    pregunta.id = 4;
-    strcpy(pregunta.tema, "Ciencia");
-    strcpy(pregunta.enunciado, "Quien propuso la teoria de la relatividad?");
-    strcpy(pregunta.opcionA, "Einstein");
-    strcpy(pregunta.opcionB, "Newton");
-    strcpy(pregunta.opcionC, "Curie");
-    strcpy(pregunta.opcionD, "Tesla");
-    pregunta.correcta = 'A';
-    fwrite(&pregunta, sizeof(tPregunta), 1, archPreguntas);
+	pregunta.id = 4;
+	strcpy(pregunta.tema, "Ciencia");
+	strcpy(pregunta.enunciado, "Que estrella esta mas cerca de la Tierra?");
+	strcpy(pregunta.opcionA, "El Sol");
+	strcpy(pregunta.opcionB, "La Luna");
+	strcpy(pregunta.opcionC, "Sirio");
+	strcpy(pregunta.opcionD, "Venus");
+	pregunta.correcta = 'A';
+	fwrite(&pregunta, sizeof(tPregunta), 1, archPreguntas);
+
 
     /* 5 — DEPORTES */
     pregunta.id = 5;
@@ -85,11 +86,11 @@ void generarArchivoPreguntas(){
     /* 7 — MUSICA */
     pregunta.id = 7;
     strcpy(pregunta.tema, "Musica");
-    strcpy(pregunta.enunciado, "De que pais era Mozart?");
-    strcpy(pregunta.opcionA, "Austria");
-    strcpy(pregunta.opcionB, "Alemania");
-    strcpy(pregunta.opcionC, "Francia");
-    strcpy(pregunta.opcionD, "Polonia");
+    strcpy(pregunta.enunciado, "Donde nació Carlos Gardel?");
+    strcpy(pregunta.opcionA, "Touluse");
+    strcpy(pregunta.opcionB, "Buenos Aires");
+    strcpy(pregunta.opcionC, "Paris");
+    strcpy(pregunta.opcionD, "Santa Fe");
     pregunta.correcta = 'A';
     fwrite(&pregunta, sizeof(tPregunta), 1, archPreguntas);
 
